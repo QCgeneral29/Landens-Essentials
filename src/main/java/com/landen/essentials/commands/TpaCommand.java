@@ -60,6 +60,7 @@ public class TpaCommand implements CommandExecutor, TabCompleter {
         player.sendMessage(ColorUtil.format("&e/tpa <username> &7- Send a request to teleport to a player."));
         player.sendMessage(ColorUtil.format("&e/tpaccept &7- Accept a pending teleport request."));
         player.sendMessage(ColorUtil.format("&e/tpadeny &7- Deny a pending teleport request."));
+        player.sendMessage(ColorUtil.format("&e/tpacancel &7- Cancel your own outgoing teleport request."));
         player.sendMessage(
                 ColorUtil.format("&e/tpahere <username> &7- Send a request for a player to teleport to you."));
         player.sendMessage(ColorUtil.format("&e======================================"));

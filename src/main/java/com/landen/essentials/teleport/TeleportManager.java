@@ -132,6 +132,31 @@ public class TeleportManager {
         return true;
     }
 
+    public boolean cancelRequest(Player requester) {
+        UUID requesterUuid = requester.getUniqueId();
+
+        // Find a pending request that was sent by this player
+        Map.Entry<UUID, TeleportRequest> entry = pendingRequests.entrySet().stream()
+                .filter(e -> e.getValue().getRequesterUuid().equals(requesterUuid))
+                .findFirst()
+                .orElse(null);
+
+        if (entry == null) {
+            requester.sendMessage(ColorUtil.format("&cYou have no outgoing teleport requests to cancel."));
+            return false;
+        }
+
+        pendingRequests.remove(entry.getKey());
+        requester.sendMessage(ColorUtil.format("&cTeleport request cancelled."));
+
+        Player target = Bukkit.getPlayer(entry.getKey());
+        if (target != null && target.isOnline()) {
+            target.sendMessage(ColorUtil.format("&f" + requester.getName() + " &ccancelled their teleport request."));
+        }
+
+        return true;
+    }
+
     public boolean denyRequest(Player target) {
         TeleportRequest request = pendingRequests.remove(target.getUniqueId());
 

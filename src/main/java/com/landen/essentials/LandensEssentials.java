@@ -6,6 +6,7 @@ import com.landen.essentials.commands.MotdCommand;
 import com.landen.essentials.commands.PingCommand;
 import com.landen.essentials.commands.SpawnCommand;
 import com.landen.essentials.commands.TpAcceptCommand;
+import com.landen.essentials.commands.TpaCancelCommand;
 import com.landen.essentials.commands.TpDenyCommand;
 import com.landen.essentials.commands.TpHereCommand;
 import com.landen.essentials.commands.TpaCommand;
@@ -71,6 +72,13 @@ public class LandensEssentials extends JavaPlugin {
             TpDenyCommand executor = new TpDenyCommand(this);
             tpadenyCmd.setExecutor(executor);
             tpadenyCmd.setTabCompleter(executor);
+        }
+
+        PluginCommand tpacancelCmd = getCommand("tpacancel");
+        if (tpacancelCmd != null) {
+            TpaCancelCommand executor = new TpaCancelCommand(this);
+            tpacancelCmd.setExecutor(executor);
+            tpacancelCmd.setTabCompleter(executor);
         }
 
         PluginCommand tpahereCmd = getCommand("tpahere");

@@ -31,6 +31,7 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 | `/tpa` | `/tpa [username]` | Print help menu or send TPA request | `landensessentials.tpa` | `true` |
 | `/tpaccept` | `/tpaccept` | Accept pending teleport request | `landensessentials.tpaccept` | `true` |
 | `/tpadeny` | `/tpadeny` | Deny pending teleport request | `landensessentials.tpadeny` | `true` |
+| `/tpacancel` | `/tpacancel` | Cancel your own outgoing teleport request | `landensessentials.tpacancel` | `true` |
 | `/tpahere` | `/tpahere <username>` | Send TPAHere request | `landensessentials.tpahere` | `true` |
 | `/motd` | `/motd` | Display MOTD in player's chat | `landensessentials.motd` | `true` |
 | `/spawn` | `/spawn` | Teleport to the overworld spawn point | `landensessentials.spawn` | `true` |

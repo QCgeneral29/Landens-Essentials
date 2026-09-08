@@ -18,6 +18,10 @@ commands:
     description: Deny a pending teleport request.
     usage: /tpadeny
     permission: landensessentials.tpadeny
+  tpacancel:
+    description: Cancel your own outgoing teleport request.
+    usage: /tpacancel
+    permission: landensessentials.tpacancel
   tpahere:
     description: Request a player to teleport to your location.
     usage: /tpahere <username>
@@ -48,6 +52,9 @@ permissions:
     default: true
   landensessentials.tpadeny:
     description: Allows denying pending teleport requests.
+    default: true
+  landensessentials.tpacancel:
+    description: Allows cancelling your own outgoing teleport requests.
     default: true
   landensessentials.tpahere:
     description: Allows sending tpahere requests to players.
