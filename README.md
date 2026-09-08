@@ -20,7 +20,9 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 - Teleport to spawn command
 - AFK (Away From Keyboard)
   - Toggle AFK manually via `/afk`
-  - Automatic AFK after inactivity (configurable, default: 1 minute)
+  - Automatic AFK after inactivity (configurable, default: 5 minutes)
+- Ping Checker
+  - View your own ping or another player's ping via `/ping`
 
 ## Commands & Permissions
 
@@ -33,6 +35,7 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 | `/motd` | `/motd` | Display MOTD in player's chat | `landensessentials.motd` | `true` |
 | `/spawn` | `/spawn` | Teleport to the overworld spawn point | `landensessentials.spawn` | `true` |
 | `/afk` | `/afk` | Toggle your AFK status | `landensessentials.afk` | `true` |
+| `/ping` | `/ping [username]` | View your own ping or another player's ping | `landensessentials.ping` | `true` |
 
 *I recommend [LuckPerms](https://modrinth.com/plugin/luckperms) for controlling user permissions*
 
