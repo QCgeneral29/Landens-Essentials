@@ -6,28 +6,17 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 
 ## Features
 
-### 1. Teleportation Request System
-- **`/tpa`**: Displays available teleport commands. 
-- **`/tpa <username>`**: Send a teleport request to the player with the username provided.
-- **`/tpaccept`**: Accepts a pending teleport request.
-- **`/tpadeny`**: Denies a pending teleport request.
-- **`/tpahere <username>`**: Requests a target player to teleport to your current location.
-
-### 2. Endermen Grief Prevention
-- Disables Endermen from picking up or placing blocks across all server worlds.
-- Configurable via `endermen.prevent-griefing: true` in `config.yml`.
-
-### 3. Message of the Day System
-- Displays a custom MOTD when players join and when `/motd` is executed.
-- **Live File Reloading**: Monitors file modification time on disk so changes made to `config.yml` take effect immediately without requiring `/reload`.
-- **Variables**:
-  - `{username}` / `{player}` – Player's username
-  - `{playtime}` – Player's formatted playtime (e.g. `3h 15m`)
-  - `{online}` – Online player count
-  - `{max_online}` – Server maximum player capacity
-  - `{world}` – Player's current world name
+- Teleportation Request System
+- Endermen Grief Prevention
+- Message of the Day System
+  - Supports variables
+    - `{username}` / `{player}` – Player's username
+    - `{playtime}` – Player's formatted playtime (e.g. `3h 15m`)
+    - `{online}` – Online player count
+    - `{max_online}` – Server maximum player capacity
+    - `{world}` – Player's current world name
   - Supports color formatting with standard `&` codes (`&e`, `&a`, `&b`, etc.).
-
+- Teleport to spawn command
 ---
 
 ## Commands & Permissions
@@ -39,6 +28,7 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 | `/tpadeny` | `/tpadeny` | Deny pending teleport request | `landensessentials.tpadeny` | `true` |
 | `/tpahere` | `/tpahere <username>` | Send TPAHere request | `landensessentials.tpahere` | `true` |
 | `/motd` | `/motd` | Display MOTD in player's chat | `landensessentials.motd` | `true` |
+| `/spawn` | `/spawn` | Teleport to the overworld spawn point | `landensessentials.spawn` | `true` |
 
 *I recommend [LuckPerms](https://modrinth.com/plugin/luckperms) for controlling user permissions*
 
@@ -76,10 +66,10 @@ Run the following command from the root directory:
 
 The compiled plugin `.jar` will be generated at:
 ```
-build/libs/LandensEssentials-1.0.0.jar
+build/libs/LandensEssentials-x.x.x.jar
 ```
 
 ### Using Eclipse
 1. Right-click project -> **Gradle** -> **Refresh Gradle Project**.
 2. Run the Gradle `build` or `jar` task.
-3. Copy `build/libs/LandensEssentials-1.0.0.jar` to your Paper server's `plugins/` directory.
+3. Copy `build/libs/LandensEssentials-x.x.x.jar` to your Paper server's `plugins/` directory.

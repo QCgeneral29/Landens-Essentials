@@ -1,5 +1,5 @@
 name: Landens-Essentials
-version: '1.0.0'
+version: '1.0.1'
 main: com.landen.essentials.LandensEssentials
 api-version: '26.2'
 description: A non-bloated essentials plugin for PaperMC.
@@ -26,6 +26,10 @@ commands:
     description: Print the Message of the Day to your chat.
     usage: /motd
     permission: landensessentials.motd
+  spawn:
+    description: Teleport to the overworld spawn point.
+    usage: /spawn
+    permission: landensessentials.spawn
 
 permissions:
   landensessentials.tpa:
@@ -42,4 +46,7 @@ permissions:
     default: true
   landensessentials.motd:
     description: Allows viewing the MOTD.
+    default: true
+  landensessentials.spawn:
+    description: Allows teleporting to the overworld spawn point.
     default: true

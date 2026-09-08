@@ -1,6 +1,7 @@
 package com.landen.essentials;
 
 import com.landen.essentials.commands.MotdCommand;
+import com.landen.essentials.commands.SpawnCommand;
 import com.landen.essentials.commands.TpAcceptCommand;
 import com.landen.essentials.commands.TpDenyCommand;
 import com.landen.essentials.commands.TpHereCommand;
@@ -74,6 +75,13 @@ public class LandensEssentials extends JavaPlugin {
             MotdCommand executor = new MotdCommand(this);
             motdCmd.setExecutor(executor);
             motdCmd.setTabCompleter(executor);
+        }
+
+        PluginCommand spawnCmd = getCommand("spawn");
+        if (spawnCmd != null) {
+            SpawnCommand executor = new SpawnCommand(this);
+            spawnCmd.setExecutor(executor);
+            spawnCmd.setTabCompleter(executor);
         }
     }
 
