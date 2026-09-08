@@ -1,3 +1,5 @@
+version = "1.0.2"
+
 plugins {
     `java`
     eclipse
@@ -21,6 +23,14 @@ java {
     }
 }
 
+tasks.named<ProcessResources>("processResources") {
+    val props = mapOf("version" to project.version)
+    inputs.properties(props)
+    filesMatching("plugin.yml") {
+        expand(props)
+    }
+}
+
 tasks.named<Jar>("jar") {
-    archiveFileName.set("LandensEssentials-1.0.1.jar")
+    archiveFileName.set("LandensEssentials-${project.version}.jar")
 }
