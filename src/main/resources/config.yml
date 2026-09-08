@@ -22,7 +22,7 @@ motd:
   message:
     - "&e=========================================="
     - "&bWelcome to the server, &f{username}&b!"
-    - "&7Playtime: &a{playtime} &7| World: &a{world}"
+    - "&7Playtime: &a{playtime} &7World: &a{world}"
     - "&7Online Players: &a{online}&7/&a{max_online}"
     - "&e=========================================="
 

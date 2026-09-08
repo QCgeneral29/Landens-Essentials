@@ -65,6 +65,26 @@ public class MotdManager {
                 .replace("{playtime}", formattedPlaytime)
                 .replace("{online}", String.valueOf(Bukkit.getOnlinePlayers().size()))
                 .replace("{max_online}", String.valueOf(Bukkit.getMaxPlayers()))
-                .replace("{world}", player.getWorld().getName());
+                .replace("{world}", getFriendlyWorldName(player));
+    }
+
+    /**
+     * Returns a user-friendly world name.
+     * world -> "Overworld"
+     * world_nether -> "Neither"
+     * world_the_end -> "The End"
+     */
+    private String getFriendlyWorldName(Player player) {
+        String worldName = player.getWorld().getName().toLowerCase();
+        switch (worldName) {
+            case "world":
+                return "Overworld";
+            case "world_nether":
+                return "Neither";
+            case "world_the_end":
+                return "The End";
+            default:
+                return player.getWorld().getName();
+        }
     }
 }

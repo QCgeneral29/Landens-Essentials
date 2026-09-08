@@ -25,7 +25,8 @@ public class TpaCommand implements CommandExecutor, TabCompleter {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
+            @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
             sender.sendMessage(ColorUtil.format("&cThis command can only be executed by players."));
             return true;
@@ -54,17 +55,19 @@ public class TpaCommand implements CommandExecutor, TabCompleter {
     }
 
     private void sendHelp(Player player) {
-        player.sendMessage(ColorUtil.format("&e========== &bLanden's Essentials Teleport Commands &e=========="));
+        player.sendMessage(ColorUtil.format("&e&bLanden's Essentials Teleport Commands &e===="));
         player.sendMessage(ColorUtil.format("&e/tpa &7- Display available teleportation commands."));
         player.sendMessage(ColorUtil.format("&e/tpa <username> &7- Send a request to teleport to a player."));
         player.sendMessage(ColorUtil.format("&e/tpaccept &7- Accept a pending teleport request."));
         player.sendMessage(ColorUtil.format("&e/tpadeny &7- Deny a pending teleport request."));
-        player.sendMessage(ColorUtil.format("&e/tpahere <username> &7- Send a request for a player to teleport to you."));
-        player.sendMessage(ColorUtil.format("&e=========================================================="));
+        player.sendMessage(
+                ColorUtil.format("&e/tpahere <username> &7- Send a request for a player to teleport to you."));
+        player.sendMessage(ColorUtil.format("&e======================================"));
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
+            @NotNull String alias, @NotNull String[] args) {
         if (args.length == 1 && sender instanceof Player player) {
             String search = args[0].toLowerCase();
             return Bukkit.getOnlinePlayers().stream()
