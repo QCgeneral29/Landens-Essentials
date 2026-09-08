@@ -3,6 +3,7 @@ package com.landen.essentials;
 import com.landen.essentials.afk.AfkManager;
 import com.landen.essentials.commands.AfkCommand;
 import com.landen.essentials.commands.MotdCommand;
+import com.landen.essentials.commands.PingCommand;
 import com.landen.essentials.commands.SpawnCommand;
 import com.landen.essentials.commands.TpAcceptCommand;
 import com.landen.essentials.commands.TpDenyCommand;
@@ -98,6 +99,13 @@ public class LandensEssentials extends JavaPlugin {
             AfkCommand executor = new AfkCommand(this);
             afkCmd.setExecutor(executor);
             afkCmd.setTabCompleter(executor);
+        }
+
+        PluginCommand pingCmd = getCommand("ping");
+        if (pingCmd != null) {
+            PingCommand executor = new PingCommand();
+            pingCmd.setExecutor(executor);
+            pingCmd.setTabCompleter(executor);
         }
     }
 

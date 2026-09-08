@@ -34,6 +34,10 @@ commands:
     description: Toggle your AFK status.
     usage: /afk
     permission: landensessentials.afk
+  ping:
+    description: View your ping or another player's ping.
+    usage: /ping [username]
+    permission: landensessentials.ping
 
 permissions:
   landensessentials.tpa:
@@ -56,5 +60,8 @@ permissions:
     default: true
   landensessentials.afk:
     description: Allows toggling AFK status.
+    default: true
+  landensessentials.ping:
+    description: Allows viewing player ping.
     default: true
 
