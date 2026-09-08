@@ -2,7 +2,7 @@
 
 **Warning:** This plugin was vibe-coded. Do not use for professional Minecraft servers.
 
-A bloat-free PaperMC plugin providing teleport requests, endermen grief prevention, and other QOL features for Minecraft 1.20+.
+A bloat-free PaperMC plugin providing teleport requests, endermen grief prevention, and other QOL features for Minecraft servers.
 
 ## Features
 
