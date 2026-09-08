@@ -1,11 +1,14 @@
 package com.landen.essentials;
 
+import com.landen.essentials.afk.AfkManager;
+import com.landen.essentials.commands.AfkCommand;
 import com.landen.essentials.commands.MotdCommand;
 import com.landen.essentials.commands.SpawnCommand;
 import com.landen.essentials.commands.TpAcceptCommand;
 import com.landen.essentials.commands.TpDenyCommand;
 import com.landen.essentials.commands.TpHereCommand;
 import com.landen.essentials.commands.TpaCommand;
+import com.landen.essentials.listeners.AfkListener;
 import com.landen.essentials.listeners.EndermanListener;
 import com.landen.essentials.listeners.PlayerListener;
 import com.landen.essentials.motd.MotdManager;
@@ -17,6 +20,7 @@ public class LandensEssentials extends JavaPlugin {
 
     private TeleportManager teleportManager;
     private MotdManager motdManager;
+    private AfkManager afkManager;
 
     @Override
     public void onEnable() {
@@ -24,9 +28,11 @@ public class LandensEssentials extends JavaPlugin {
 
         this.teleportManager = new TeleportManager(this);
         this.motdManager = new MotdManager(this);
+        this.afkManager = new AfkManager(this);
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new EndermanListener(this), this);
+        getServer().getPluginManager().registerEvents(new AfkListener(this), this);
 
         registerCommands();
 
@@ -37,6 +43,9 @@ public class LandensEssentials extends JavaPlugin {
     public void onDisable() {
         if (teleportManager != null) {
             teleportManager.shutdown();
+        }
+        if (afkManager != null) {
+            afkManager.shutdown();
         }
         getLogger().info("Landen's Essentials has been disabled.");
     }
@@ -83,6 +92,13 @@ public class LandensEssentials extends JavaPlugin {
             spawnCmd.setExecutor(executor);
             spawnCmd.setTabCompleter(executor);
         }
+
+        PluginCommand afkCmd = getCommand("afk");
+        if (afkCmd != null) {
+            AfkCommand executor = new AfkCommand(this);
+            afkCmd.setExecutor(executor);
+            afkCmd.setTabCompleter(executor);
+        }
     }
 
     public TeleportManager getTeleportManager() {
@@ -91,5 +107,9 @@ public class LandensEssentials extends JavaPlugin {
 
     public MotdManager getMotdManager() {
         return motdManager;
+    }
+
+    public AfkManager getAfkManager() {
+        return afkManager;
     }
 }

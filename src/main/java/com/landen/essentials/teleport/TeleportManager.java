@@ -63,6 +63,10 @@ public class TeleportManager {
             target.sendMessage(ColorUtil.format("&aType &e/tpaccept &ato accept or &c/tpadeny &ato deny."));
         }
 
+        if (plugin.getAfkManager() != null && plugin.getAfkManager().isAfk(target)) {
+            requester.sendMessage(ColorUtil.format("&eNote: &f" + target.getName() + " &eis currently AFK."));
+        }
+
         return true;
     }
 

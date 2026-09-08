@@ -30,6 +30,10 @@ commands:
     description: Teleport to the overworld spawn point.
     usage: /spawn
     permission: landensessentials.spawn
+  afk:
+    description: Toggle your AFK status.
+    usage: /afk
+    permission: landensessentials.afk
 
 permissions:
   landensessentials.tpa:
@@ -50,3 +54,7 @@ permissions:
   landensessentials.spawn:
     description: Allows teleporting to the overworld spawn point.
     default: true
+  landensessentials.afk:
+    description: Allows toggling AFK status.
+    default: true
+

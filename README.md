@@ -8,6 +8,7 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 
 - Teleportation Request System
 - Endermen Grief Prevention
+  - Can be disabled in config.yml
 - Message of the Day System
   - Supports variables
     - `{username}` / `{player}` – Player's username
@@ -17,7 +18,9 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
     - `{world}` – Player's current world name
   - Supports color formatting with standard `&` codes (`&e`, `&a`, `&b`, etc.).
 - Teleport to spawn command
----
+- AFK (Away From Keyboard)
+  - Toggle AFK manually via `/afk`
+  - Automatic AFK after inactivity (configurable, default: 1 minute)
 
 ## Commands & Permissions
 
@@ -29,6 +32,7 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 | `/tpahere` | `/tpahere <username>` | Send TPAHere request | `landensessentials.tpahere` | `true` |
 | `/motd` | `/motd` | Display MOTD in player's chat | `landensessentials.motd` | `true` |
 | `/spawn` | `/spawn` | Teleport to the overworld spawn point | `landensessentials.spawn` | `true` |
+| `/afk` | `/afk` | Toggle your AFK status | `landensessentials.afk` | `true` |
 
 *I recommend [LuckPerms](https://modrinth.com/plugin/luckperms) for controlling user permissions*
 
@@ -52,6 +56,16 @@ motd:
     - "&7Playtime: &a{playtime} &7| World: &a{world}"
     - "&7Online Players: &a{online}&7/&a{max_online}"
     - "&e=========================================="
+
+afk:
+  # Number of seconds of inactivity before a player is automatically marked as AFK.
+  # Default is 60 seconds (1 minute). Set to 0 or negative to disable auto-AFK.
+  auto-afk-seconds: 60
+  # Format for player name shown in TAB when marked as AFK.
+  # Available placeholders: {username}
+  tab-format: "&7AFK-&f{username}"
+  # Broadcast AFK status changes to the server.
+  broadcast: true
 ```
 
 ---
