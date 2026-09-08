@@ -1,0 +1,45 @@
+name: LandensEssentials
+version: '1.0.0'
+main: com.landen.essentials.LandensEssentials
+api-version: '1.20'
+description: A refined, professional, non-bloated essentials plugin for PaperMC.
+author: Landen
+
+commands:
+  tpa:
+    description: Send a teleport request to a player, or view help.
+    usage: /tpa [username]
+    permission: landensessentials.tpa
+  tpaccept:
+    description: Accept a pending teleport request.
+    usage: /tpaccept
+    permission: landensessentials.tpaccept
+  tpadeny:
+    description: Deny a pending teleport request.
+    usage: /tpadeny
+    permission: landensessentials.tpadeny
+  tpahere:
+    description: Request a player to teleport to your location.
+    usage: /tpahere <username>
+    permission: landensessentials.tpahere
+  motd:
+    description: Print the Message of the Day to your chat.
+    usage: /motd
+    permission: landensessentials.motd
+
+permissions:
+  landensessentials.tpa:
+    description: Allows sending teleport requests to players.
+    default: true
+  landensessentials.tpaccept:
+    description: Allows accepting pending teleport requests.
+    default: true
+  landensessentials.tpadeny:
+    description: Allows denying pending teleport requests.
+    default: true
+  landensessentials.tpahere:
+    description: Allows sending tpahere requests to players.
+    default: true
+  landensessentials.motd:
+    description: Allows viewing the MOTD.
+    default: true

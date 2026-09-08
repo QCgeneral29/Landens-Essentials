@@ -1,0 +1,27 @@
+# Landen's Essentials Configuration
+
+endermen:
+  # When set to true, Endermen cannot pick up or place blocks.
+  prevent-griefing: true
+
+teleport:
+  # Number of seconds before a teleport request expires.
+  request-timeout-seconds: 120
+  # Horizontal and vertical block radius to search for a safe landing location.
+  safe-search-radius: 4
+
+motd:
+  # Enable MOTD display on player join.
+  enabled: true
+  # Available placeholders:
+  # {username}   - Player's username
+  # {playtime}   - Formatted player playtime (e.g. "12h 45m")
+  # {online}     - Current online player count
+  # {max_online} - Maximum player limit
+  # {world}      - Player's current world name
+  message:
+    - "&e=========================================="
+    - "&bWelcome to the server, &f{username}&b!"
+    - "&7Playtime: &a{playtime} &7| World: &a{world}"
+    - "&7Online Players: &a{online}&7/&a{max_online}"
+    - "&e=========================================="
