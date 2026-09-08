@@ -34,7 +34,7 @@ public class TeleportManager {
     }
 
     public long getTimeoutMillis() {
-        long seconds = plugin.getConfig().getLong("teleport.request-timeout-seconds", 120);
+        long seconds = plugin.getConfig().getLong("teleport.request-timeout-seconds", 60);
         return seconds * 1000L;
     }
 
@@ -51,15 +51,18 @@ public class TeleportManager {
         TeleportRequest request = new TeleportRequest(requester.getUniqueId(), target.getUniqueId(), type);
         pendingRequests.put(target.getUniqueId(), request);
 
-        int timeoutSeconds = plugin.getConfig().getInt("teleport.request-timeout-seconds", 120);
+        int timeoutSeconds = plugin.getConfig().getInt("teleport.request-timeout-seconds", 60);
 
         if (type == TeleportRequest.Type.TPA) {
-            requester.sendMessage(ColorUtil.format("&aTeleport request sent to &f" + target.getName() + "&a. Expires in " + timeoutSeconds + "s."));
+            requester.sendMessage(ColorUtil.format(
+                    "&aTeleport request sent to &f" + target.getName() + "&a. Expires in " + timeoutSeconds + "s."));
             target.sendMessage(ColorUtil.format("&f" + requester.getName() + " &ahas requested to teleport to you."));
             target.sendMessage(ColorUtil.format("&aType &e/tpaccept &ato accept or &c/tpadeny &ato deny."));
         } else {
-            requester.sendMessage(ColorUtil.format("&aTeleport-here request sent to &f" + target.getName() + "&a. Expires in " + timeoutSeconds + "s."));
-            target.sendMessage(ColorUtil.format("&f" + requester.getName() + " &ahas requested you to teleport to them."));
+            requester.sendMessage(ColorUtil.format("&aTeleport-here request sent to &f" + target.getName()
+                    + "&a. Expires in " + timeoutSeconds + "s."));
+            target.sendMessage(
+                    ColorUtil.format("&f" + requester.getName() + " &ahas requested you to teleport to them."));
             target.sendMessage(ColorUtil.format("&aType &e/tpaccept &ato accept or &c/tpadeny &ato deny."));
         }
 
@@ -114,9 +117,11 @@ public class TeleportManager {
                 if (success) {
                     playerToTeleport.sendMessage(ColorUtil.format("&aTeleporting..."));
                     if (playerToTeleport.equals(requester)) {
-                        target.sendMessage(ColorUtil.format("&aAccepted teleport request from &f" + requester.getName() + "&a."));
+                        target.sendMessage(
+                                ColorUtil.format("&aAccepted teleport request from &f" + requester.getName() + "&a."));
                     } else {
-                        requester.sendMessage(ColorUtil.format("&f" + target.getName() + " &aaccepted your teleport request."));
+                        requester.sendMessage(
+                                ColorUtil.format("&f" + target.getName() + " &aaccepted your teleport request."));
                     }
                 } else {
                     playerToTeleport.sendMessage(ColorUtil.format("&cTeleport failed."));

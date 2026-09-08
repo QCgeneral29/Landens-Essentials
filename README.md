@@ -45,7 +45,7 @@ endermen:
   prevent-griefing: true
 
 teleport:
-  request-timeout-seconds: 120
+  request-timeout-seconds: 60
   safe-search-radius: 4
 
 motd:
@@ -59,8 +59,8 @@ motd:
 
 afk:
   # Number of seconds of inactivity before a player is automatically marked as AFK.
-  # Default is 60 seconds (1 minute). Set to 0 or negative to disable auto-AFK.
-  auto-afk-seconds: 60
+  # Default is 300 seconds (5 minutes). Set to 0 or negative to disable auto-AFK.
+  auto-afk-seconds: 300
   # Format for player name shown in TAB when marked as AFK.
   # Available placeholders: {username}
   tab-format: "&7AFK-&f{username}"
