@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/LandensEssentialsLogo.png" alt="Project Logo" width="128" height="128">
+</p>
+
 # Landen's Essentials
 
 **AI Disclosure:** A substantial portion of this plugin's code was generated with AI assistance. Review and test the plugin before using it on a production server.
