@@ -1,6 +1,6 @@
 # Landen's Essentials
 
-**Warning:** This plugin was vibe-coded. Do not use for professional Minecraft servers.
+**AI Disclosure:** A substantial portion of this plugin's code was generated with AI assistance. Review and test the plugin before using it on a production server.
 
 A bloat-free PaperMC plugin providing teleport requests, endermen grief prevention, and other QOL features for Minecraft servers.
 
