@@ -55,6 +55,8 @@ endermen:
 teleport:
   request-timeout-seconds: 60
   safe-search-radius: 4
+  # Delay before teleporting to spawn in seconds. 0 = no delay.
+  spawn-teleport-delay-seconds: 5
 
 motd:
   enabled: true

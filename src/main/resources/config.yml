@@ -9,6 +9,7 @@ teleport:
   request-timeout-seconds: 60
   # Horizontal and vertical block radius to search for a safe landing location.
   safe-search-radius: 4
+  spawn-teleport-delay-seconds: 5
 
 motd:
   # Enable MOTD display on player join.
