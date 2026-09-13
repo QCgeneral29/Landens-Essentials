@@ -50,16 +50,26 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 
 ```yaml
 endermen:
+  # When set to true, Endermen cannot pick up or place blocks.
   prevent-griefing: true
 
 teleport:
+  # Number of seconds before a teleport request expires.
   request-timeout-seconds: 60
+  # Horizontal and vertical block radius to search for a safe landing location.
   safe-search-radius: 4
   # Delay before teleporting to spawn in seconds. 0 = no delay.
   spawn-teleport-delay-seconds: 5
 
 motd:
+  # Enable MOTD display on player join.
   enabled: true
+  # Available placeholders:
+  # {username}   - Player's username
+  # {playtime}   - Formatted player playtime (e.g. "12h 45m")
+  # {online}     - Current online player count
+  # {max_online} - Maximum player limit
+  # {world}      - Player's current world name
   message:
     - "&e=========================================="
     - "&bWelcome to the server, &f{username}&b!"
