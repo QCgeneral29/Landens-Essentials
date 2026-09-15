@@ -4,6 +4,7 @@ import com.landen.essentials.afk.AfkManager;
 import com.landen.essentials.commands.AfkCommand;
 import com.landen.essentials.commands.MotdCommand;
 import com.landen.essentials.commands.PingCommand;
+import com.landen.essentials.commands.ReloadCommand;
 import com.landen.essentials.commands.SpawnCommand;
 import com.landen.essentials.commands.TpAcceptCommand;
 import com.landen.essentials.commands.TpaCancelCommand;
@@ -23,6 +24,8 @@ public class LandensEssentials extends JavaPlugin {
     private TeleportManager teleportManager;
     private MotdManager motdManager;
     private AfkManager afkManager;
+    private EndermanListener endermanListener;
+    private SpawnCommand spawnCommand;
 
     @Override
     public void onEnable() {
@@ -31,9 +34,11 @@ public class LandensEssentials extends JavaPlugin {
         this.teleportManager = new TeleportManager(this);
         this.motdManager = new MotdManager(this);
         this.afkManager = new AfkManager(this);
+        this.endermanListener = new EndermanListener(this);
+        this.spawnCommand = new SpawnCommand(this);
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-        getServer().getPluginManager().registerEvents(new EndermanListener(this), this);
+        getServer().getPluginManager().registerEvents(this.endermanListener, this);
         getServer().getPluginManager().registerEvents(new AfkListener(this), this);
 
         registerCommands();
@@ -50,6 +55,26 @@ public class LandensEssentials extends JavaPlugin {
             afkManager.shutdown();
         }
         getLogger().info("Landen's Essentials has been disabled.");
+    }
+
+    public void reloadPlugin() {
+        reloadConfig();
+        if (teleportManager != null) {
+            teleportManager.loadConfig();
+        }
+        if (motdManager != null) {
+            motdManager.loadConfig();
+        }
+        if (afkManager != null) {
+            afkManager.loadConfig();
+        }
+        if (endermanListener != null) {
+            endermanListener.loadConfig();
+        }
+        if (spawnCommand != null) {
+            spawnCommand.loadConfig();
+        }
+        getLogger().info("Landen's Essentials configuration reloaded successfully.");
     }
 
     private void registerCommands() {
@@ -97,9 +122,8 @@ public class LandensEssentials extends JavaPlugin {
 
         PluginCommand spawnCmd = getCommand("spawn");
         if (spawnCmd != null) {
-            SpawnCommand executor = new SpawnCommand(this);
-            spawnCmd.setExecutor(executor);
-            spawnCmd.setTabCompleter(executor);
+            spawnCmd.setExecutor(this.spawnCommand);
+            spawnCmd.setTabCompleter(this.spawnCommand);
         }
 
         PluginCommand afkCmd = getCommand("afk");
@@ -114,6 +138,13 @@ public class LandensEssentials extends JavaPlugin {
             PingCommand executor = new PingCommand();
             pingCmd.setExecutor(executor);
             pingCmd.setTabCompleter(executor);
+        }
+
+        PluginCommand reloadCmd = getCommand("reload-landens-essentials");
+        if (reloadCmd != null) {
+            ReloadCommand executor = new ReloadCommand(this);
+            reloadCmd.setExecutor(executor);
+            reloadCmd.setTabCompleter(executor);
         }
     }
 

@@ -6,43 +6,30 @@ import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 
-import java.io.File;
 import java.util.List;
 
 public class MotdManager {
 
     private final LandensEssentials plugin;
-    private final File configFile;
-    private long lastConfigModification = -1L;
+    private boolean enabled;
+    private List<String> messageLines;
 
     public MotdManager(LandensEssentials plugin) {
         this.plugin = plugin;
-        this.configFile = new File(plugin.getDataFolder(), "config.yml");
+        loadConfig();
     }
 
-    public void checkAndReloadConfig() {
-        if (configFile.exists()) {
-            long currentLastModified = configFile.lastModified();
-            if (currentLastModified > lastConfigModification) {
-                plugin.reloadConfig();
-                lastConfigModification = currentLastModified;
-            }
-        }
+    public void loadConfig() {
+        this.enabled = plugin.getConfig().getBoolean("motd.enabled", true);
+        this.messageLines = plugin.getConfig().getStringList("motd.message");
     }
 
     public void sendMotd(Player player) {
-        checkAndReloadConfig();
-
-        if (!plugin.getConfig().getBoolean("motd.enabled", true)) {
+        if (!enabled || messageLines == null || messageLines.isEmpty()) {
             return;
         }
 
-        List<String> rawLines = plugin.getConfig().getStringList("motd.message");
-        if (rawLines.isEmpty()) {
-            return;
-        }
-
-        for (String rawLine : rawLines) {
+        for (String rawLine : messageLines) {
             String formattedLine = replacePlaceholders(rawLine, player);
             player.sendMessage(ColorUtil.format(formattedLine));
         }

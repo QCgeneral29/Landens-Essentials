@@ -42,6 +42,10 @@ commands:
     description: View your ping or another player's ping.
     usage: /ping [username]
     permission: landensessentials.ping
+  reload-landens-essentials:
+    description: Reload the Landen's Essentials configuration.
+    usage: /reload-landens-essentials
+    permission: landensessentials.reload
 
 permissions:
   landensessentials.tpa:
@@ -71,4 +75,7 @@ permissions:
   landensessentials.ping:
     description: Allows viewing player ping.
     default: true
+  landensessentials.reload:
+    description: Allows reloading the Landen's Essentials configuration.
+    default: op
 

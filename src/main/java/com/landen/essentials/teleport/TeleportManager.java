@@ -16,10 +16,20 @@ public class TeleportManager {
     private final LandensEssentials plugin;
     private final Map<UUID, TeleportRequest> pendingRequests = new ConcurrentHashMap<>();
     private BukkitTask cleanupTask;
+    private int requestTimeoutSeconds;
+    private long timeoutMillis;
+    private int safeSearchRadius;
 
     public TeleportManager(LandensEssentials plugin) {
         this.plugin = plugin;
+        loadConfig();
         startCleanupTask();
+    }
+
+    public void loadConfig() {
+        this.requestTimeoutSeconds = plugin.getConfig().getInt("teleport.request-timeout-seconds", 60);
+        this.timeoutMillis = this.requestTimeoutSeconds * 1000L;
+        this.safeSearchRadius = plugin.getConfig().getInt("teleport.safe-search-radius", 4);
     }
 
     private void startCleanupTask() {
@@ -33,13 +43,16 @@ public class TeleportManager {
         pendingRequests.clear();
     }
 
+    public int getRequestTimeoutSeconds() {
+        return requestTimeoutSeconds;
+    }
+
     public long getTimeoutMillis() {
-        long seconds = plugin.getConfig().getLong("teleport.request-timeout-seconds", 60);
-        return seconds * 1000L;
+        return timeoutMillis;
     }
 
     public int getSafeSearchRadius() {
-        return plugin.getConfig().getInt("teleport.safe-search-radius", 4);
+        return safeSearchRadius;
     }
 
     public boolean sendRequest(Player requester, Player target, TeleportRequest.Type type) {
@@ -51,7 +64,7 @@ public class TeleportManager {
         TeleportRequest request = new TeleportRequest(requester.getUniqueId(), target.getUniqueId(), type);
         pendingRequests.put(target.getUniqueId(), request);
 
-        int timeoutSeconds = plugin.getConfig().getInt("teleport.request-timeout-seconds", 60);
+        int timeoutSeconds = this.requestTimeoutSeconds;
 
         if (type == TeleportRequest.Type.TPA) {
             requester.sendMessage(ColorUtil.format(

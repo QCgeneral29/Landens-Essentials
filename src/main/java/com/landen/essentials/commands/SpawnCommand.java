@@ -26,9 +26,15 @@ public class SpawnCommand implements CommandExecutor, TabCompleter {
     private final LandensEssentials plugin;
     // Track players waiting for a spawn teleport to avoid spamming
     private static final Set<UUID> pendingSpawnTeleports = ConcurrentHashMap.newKeySet();
+    private int delaySeconds;
 
     public SpawnCommand(LandensEssentials plugin) {
         this.plugin = plugin;
+        loadConfig();
+    }
+
+    public void loadConfig() {
+        this.delaySeconds = plugin.getConfig().getInt("teleport.spawn-teleport-delay-seconds", 5);
     }
 
     @Override
@@ -68,7 +74,7 @@ public class SpawnCommand implements CommandExecutor, TabCompleter {
 
         final Location finalTargetLocation = targetLocation;
 
-        int delaySeconds = plugin.getConfig().getInt("teleport.spawn-teleport-delay-seconds", 5);
+        int delaySeconds = this.delaySeconds;
 
         if (pendingSpawnTeleports.contains(player.getUniqueId())) {
             player.sendMessage(ColorUtil.format("&cYou are already waiting to teleport."));

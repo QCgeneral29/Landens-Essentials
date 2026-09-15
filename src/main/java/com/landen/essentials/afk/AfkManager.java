@@ -17,14 +17,34 @@ public class AfkManager {
     private final Set<UUID> afkPlayers = ConcurrentHashMap.newKeySet();
     private final Map<UUID, Long> lastActivity = new ConcurrentHashMap<>();
     private BukkitTask autoAfkTask;
+    private long autoAfkSeconds;
+    private long thresholdMillis;
+    private String tabFormat;
+    private boolean broadcast;
 
     public AfkManager(LandensEssentials plugin) {
         this.plugin = plugin;
+        loadConfig();
         long now = System.currentTimeMillis();
         for (Player player : Bukkit.getOnlinePlayers()) {
             lastActivity.put(player.getUniqueId(), now);
         }
         startAutoAfkTask();
+    }
+
+    public void loadConfig() {
+        this.autoAfkSeconds = plugin.getConfig().getLong("afk.auto-afk-seconds", 300L);
+        this.thresholdMillis = this.autoAfkSeconds * 1000L;
+        this.tabFormat = plugin.getConfig().getString("afk.tab-format", "&7AFK-&f{username}");
+        this.broadcast = plugin.getConfig().getBoolean("afk.broadcast", true);
+
+        for (UUID uuid : afkPlayers) {
+            Player player = Bukkit.getPlayer(uuid);
+            if (player != null && player.isOnline()) {
+                String formattedTab = this.tabFormat.replace("{username}", player.getName());
+                player.playerListName(ColorUtil.format(formattedTab));
+            }
+        }
     }
 
     private void startAutoAfkTask() {
@@ -56,16 +76,13 @@ public class AfkManager {
             return;
         }
 
-        boolean broadcast = plugin.getConfig().getBoolean("afk.broadcast", true);
-
         if (afk) {
             afkPlayers.add(uuid);
 
-            String tabFormat = plugin.getConfig().getString("afk.tab-format", "&7AFK-&f{username}");
-            String formattedTab = tabFormat.replace("{username}", player.getName());
+            String formattedTab = this.tabFormat.replace("{username}", player.getName());
             player.playerListName(ColorUtil.format(formattedTab));
 
-            if (broadcast) {
+            if (this.broadcast) {
                 Bukkit.broadcast(ColorUtil.format("&7* &f" + player.getName() + " &7is now AFK."));
             } else {
                 player.sendMessage(ColorUtil.format("&7You are now AFK."));
@@ -76,7 +93,7 @@ public class AfkManager {
 
             player.playerListName(null);
 
-            if (broadcast) {
+            if (this.broadcast) {
                 Bukkit.broadcast(ColorUtil.format("&7* &f" + player.getName() + " &7is no longer AFK."));
             } else {
                 player.sendMessage(ColorUtil.format("&7You are no longer AFK."));
@@ -120,13 +137,11 @@ public class AfkManager {
     }
 
     private void checkAutoAfk() {
-        long autoAfkSeconds = plugin.getConfig().getLong("afk.auto-afk-seconds", 60L);
-        if (autoAfkSeconds <= 0) {
+        if (this.autoAfkSeconds <= 0) {
             return;
         }
 
         long now = System.currentTimeMillis();
-        long thresholdMillis = autoAfkSeconds * 1000L;
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (isAfk(player)) {
@@ -134,7 +149,7 @@ public class AfkManager {
             }
 
             long last = lastActivity.getOrDefault(player.getUniqueId(), now);
-            if (now - last >= thresholdMillis) {
+            if (now - last >= this.thresholdMillis) {
                 setAfk(player, true);
             }
         }

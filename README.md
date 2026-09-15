@@ -27,6 +27,8 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
   - Automatic AFK after inactivity (configurable, default: 5 minutes)
 - Ping Checker
   - View your own ping or another player's ping via `/ping`
+- Configuration Reload
+  - Reload `config.yml` on the fly without restarting the server via `/reload-landens-essentials`
 
 ## Commands & Permissions
 
@@ -41,6 +43,7 @@ A bloat-free PaperMC plugin providing teleport requests, endermen grief preventi
 | `/spawn` | `/spawn` | Teleport to the overworld spawn point | `landensessentials.spawn` | `true` |
 | `/afk` | `/afk` | Toggle your AFK status | `landensessentials.afk` | `true` |
 | `/ping` | `/ping [username]` | View your own ping or another player's ping | `landensessentials.ping` | `true` |
+| `/reload-landens-essentials` | `/reload-landens-essentials` | Reload plugin configuration | `landensessentials.reload` | `op` |
 
 *I recommend [LuckPerms](https://modrinth.com/plugin/luckperms) for controlling user permissions*
 
