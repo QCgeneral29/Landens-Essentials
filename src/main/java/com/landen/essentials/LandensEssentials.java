@@ -16,6 +16,7 @@ import com.landen.essentials.listeners.EndermanListener;
 import com.landen.essentials.listeners.PlayerListener;
 import com.landen.essentials.motd.MotdManager;
 import com.landen.essentials.teleport.TeleportManager;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,6 +43,9 @@ public class LandensEssentials extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new AfkListener(this), this);
 
         registerCommands();
+
+        int pluginId = 34074;
+        Metrics metrics = new Metrics(this, pluginId);
 
         getLogger().info("Landen's Essentials has been successfully enabled.");
     }
